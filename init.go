@@ -15,13 +15,13 @@ type PaymentOrder struct {
 	Currency         string             `json:"currency"`
 	PayAmount        int                `json:"pay_amount"`
 	ReceiptDetails   []ReceiptItem      `json:"receipt_details"`
-	LinkLifeTime     *int               `json:"link_life_time,omitempty"`     // время жизни платежной ссылки в минутах
-	UserPhone        *string            `json:"user_phone,omitempty"`         // номер телефона плательщика
-	UserEmail        *string            `json:"user_email,omitempty"`         // email адрес плательщика
-	ReturnURLSuccess *string            `json:"return_url_success,omitempty"` // URL для возврата после успешного платежа
-	ReturnURLFail    *string            `json:"return_url_fail,omitempty"`    // URL для возврата в случае ошибки
-	PayForDetails    *map[string]string `json:"pay_for_details,omitempty"`    // детальная информация о платеже
-	QRLifeTime       *int               `json:"qr_life_time"`                 // время жизни QR в минутах
+	LinkLifeTime     *int               `json:"link_life_time"`     // время жизни платежной ссылки в минутах
+	UserPhone        *string            `json:"user_phone"`         // номер телефона плательщика
+	UserEmail        *string            `json:"user_email"`         // email адрес плательщика
+	ReturnURLSuccess *string            `json:"return_url_success"` // URL для возврата после успешного платежа
+	ReturnURLFail    *string            `json:"return_url_fail"`    // URL для возврата в случае ошибки
+	PayForDetails    *map[string]string `json:"pay_for_details"`    // детальная информация о платеже
+	QRLifeTime       *int               `json:"qr_life_time"`       // время жизни QR в минутах
 }
 
 type ReceiptItem struct {
