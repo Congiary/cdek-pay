@@ -112,7 +112,6 @@ func (c *Client) PostRequestWithContext(ctx context.Context, url string, request
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(string(data))
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.baseURL+url, bytes.NewReader(data))
 	if err != nil {
@@ -124,7 +123,6 @@ func (c *Client) PostRequestWithContext(ctx context.Context, url string, request
 
 // Функция для генерации подписи
 func generateSignature(data map[string]interface{}, secretKey string) string {
-	fmt.Println(data)
 	// Сортировка ключей
 	keys := make([]string, 0, len(data))
 	for k := range data {
