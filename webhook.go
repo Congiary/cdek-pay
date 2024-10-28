@@ -8,11 +8,11 @@ import (
 )
 
 type Webhook struct {
-	Payment   Payment `json:"payment"`
-	Signature string  `json:"signature"`
+	Payment   PaymentEvent `json:"payment"`
+	Signature string       `json:"signature"`
 }
 
-type Payment struct {
+type PaymentEvent struct {
 	Amount    int    `json:"pay_amount"`
 	AccessKey string `json:"access_key"`
 	Currency  string `json:"currency"`

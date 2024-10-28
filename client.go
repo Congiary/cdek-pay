@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/google/go-querystring/query"
 	"io"
 	"net/http"
 	"sort"
@@ -118,6 +119,27 @@ func (c *Client) PostRequestWithContext(ctx context.Context, url string, request
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
+	return c.httpClient.Do(req)
+}
+
+// GetRequestWithContext will automatically sign the request with token
+// Use BaseRequest type to implement any API request
+func (c *Client) GetRequestWithContext(ctx context.Context, url string, request RequestInterface) (*http.Response, error) {
+	c.secureRequest(request)
+
+	// Add query parameters from request to URL
+	queryParams, err := query.Values(request)
+	if err != nil {
+		return nil, err
+	}
+
+	reqURL := c.baseURL + url + "?" + queryParams.Encode()
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, reqURL, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/json")
+
 	return c.httpClient.Do(req)
 }
 

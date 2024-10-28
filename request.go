@@ -1,8 +1,8 @@
 package cdek_pay
 
 type BaseRequest struct {
-	Login     string `json:"login"`
-	Signature string `json:"signature"`
+	Login     string `json:"login" url:"login"`
+	Signature string `json:"signature" url:"signature"`
 }
 
 type RequestInterface interface {
