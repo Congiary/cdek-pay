@@ -102,7 +102,7 @@ func (c *Client) secureRequest(request RequestInterface) {
 	request.SetLogin(c.login)
 
 	v := request.GetValuesForSignature()
-	request.SetSignature(strings.ToUpper(generateSignature(v, c.secretKey)))
+	request.SetSignature(generateSignature(v, c.secretKey))
 }
 
 // PostRequestWithContext will automatically sign the request with token
@@ -161,5 +161,5 @@ func generateSignature(data map[string]interface{}, secretKey string) string {
 
 	// Генерация SHA-256
 	hash := sha256.Sum256([]byte(signatureStr))
-	return hex.EncodeToString(hash[:])
+	return strings.ToUpper(hex.EncodeToString(hash[:]))
 }
