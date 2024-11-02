@@ -24,13 +24,24 @@ type PaymentOrder struct {
 	QRLifeTime       *int               `json:"qr_life_time"`                 // время жизни QR в минутах
 }
 
+const (
+	ReceiptItemPaymentMethodFullPrepayment = "full_prepayment"
+	ReceiptItemPaymentMethodPrepayment     = "prepayment"
+	ReceiptItemPaymentMethodAdvance        = "advance"
+	ReceiptItemPaymentMethodFullPayment    = "full_payment"
+	ReceiptItemPaymentMethodPartialPayment = "partial_payment"
+	ReceiptItemPaymentMethodCredit         = "credit"
+	ReceiptItemPaymentMethodCreditPayment  = "credit_payment"
+)
+
 type ReceiptItem struct {
-	ID            string  `json:"id"`             // Идентификатор товара (уникальный в рамках одного чека)
-	Name          string  `json:"name"`           // Наименование товара
-	Price         int     `json:"price"`          // Цена за единицу товара в копейках
-	Quantity      float64 `json:"quantity"`       // Количество единиц товара, до 2 знаков после запятой
-	Sum           int     `json:"sum"`            // Сумма в копейках
-	PaymentObject int     `json:"payment_object"` // Признак предмета расчета
+	ID            string  `json:"id"`                       // Идентификатор товара (уникальный в рамках одного чека)
+	Name          string  `json:"name"`                     // Наименование товара
+	Price         int     `json:"price"`                    // Цена за единицу товара в копейках
+	Quantity      float64 `json:"quantity"`                 // Количество единиц товара, до 2 знаков после запятой
+	Sum           int     `json:"sum"`                      // Сумма в копейках
+	PaymentObject int     `json:"payment_object"`           // Признак предмета расчета
+	PaymentMethod string  `json:"payment_method,omitempty"` // Признак способа расчёта. Если параметр не передается используется дефолтное значение 'full_payment'.
 }
 
 func (i *InitRequest) GetValuesForSignature() map[string]interface{} {

@@ -12,7 +12,7 @@ func FlattenStructToMap(data interface{}, prefix string) map[string]interface{} 
 	dataType := reflect.TypeOf(data)
 
 	// Проверяем, является ли value nil
-	if !value.IsValid() || (value.Kind() == reflect.Ptr && value.IsNil()) {
+	if !value.IsValid() || (value.Kind() == reflect.Ptr && value.IsNil()) || (value.Kind() == reflect.String && value.IsZero()) {
 		return flatMap
 	}
 
@@ -28,7 +28,7 @@ func FlattenStructToMap(data interface{}, prefix string) map[string]interface{} 
 		key := prefix + fieldType.Tag.Get("json")
 
 		// Пропускаем поля со значением nil
-		if !field.IsValid() || (field.Kind() == reflect.Ptr && field.IsNil()) {
+		if !field.IsValid() || (field.Kind() == reflect.Ptr && field.IsNil()) || (field.Kind() == reflect.String && field.IsZero()) {
 			continue
 		}
 
